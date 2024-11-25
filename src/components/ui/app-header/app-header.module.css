@@ -22,18 +22,12 @@
 
 .link_active {
   color: var(--text-primary-color);
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-  text-decoration: none;
 }
 
 .link_position_last {
   display: flex;
   justify-content: flex-end;
   flex-basis: 35%;
-  color: #fff;
-  text-decoration: none;
 }
 
 .logo {

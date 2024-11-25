@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import React, { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CurrencyIcon,
@@ -15,7 +15,7 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
     <Link
       to={orderInfo.number.toString()}
       relative='path'
-      state={{ ...locationState, orderNumber: orderInfo.number.toString() }}
+      state={locationState}
       className={`p-6 mb-4 mr-2 ${styles.order}`}
     >
       <div className={styles.order_info}>
