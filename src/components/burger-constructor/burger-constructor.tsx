@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 import { TConstructorIngredient } from '@utils-types';
@@ -23,7 +23,6 @@ export const BurgerConstructor: FC = () => {
   const isUserRegistered = useSelector(selectUserData) !== null;
   const orderRequest = useSelector(selectIsOrderRequestPending);
   const orderModalData = useSelector(selectModalOrderData);
-
   const getBurgerIngredientIds = useMemo(() => {
     const ingredientIds = constructorItems.ingredients.map(
       (ingredient) => ingredient._id
@@ -61,6 +60,12 @@ export const BurgerConstructor: FC = () => {
     dispatch(clearModalAfterOrder());
     dispatch(resetBuilder());
   };
+
+  useEffect(() => {
+    if (orderModalData) {
+      dispatch(resetBuilder());
+    }
+  }, [orderModalData, dispatch]);
 
   return (
     <BurgerConstructorUI

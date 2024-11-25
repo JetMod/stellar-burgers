@@ -18,7 +18,6 @@
   display: flex;
   text-decoration: none;
   color: var(--text-inactive-color);
-  
 }
 
 .link_active {
@@ -33,6 +32,8 @@
   display: flex;
   justify-content: flex-end;
   flex-basis: 35%;
+  color: #fff;
+  text-decoration: none;
 }
 
 .logo {

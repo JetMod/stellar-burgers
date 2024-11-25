@@ -18,8 +18,16 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           isActive ? styles.link_active : styles.link
         }
       >
-        <BurgerIcon type='primary' />
-        <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
+        {({ isActive }) => (
+          <>
+            <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
+            <p
+              className={`text text_type_main-default ml-2 mr-10 ${isActive ? styles.text_active : ''}`}
+            >
+              Конструктор
+            </p>
+          </>
+        )}
       </NavLink>
       <NavLink
         to='/feed'
@@ -27,8 +35,16 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           isActive ? styles.link_active : styles.link
         }
       >
-        <ListIcon type='primary' />
-        <p className='text text_type_main-default ml-2'>Лента заказов</p>
+        {({ isActive }) => (
+          <>
+            <ListIcon type={isActive ? 'primary' : 'secondary'} />
+            <p
+              className={`text text_type_main-default ml-2 ${isActive ? styles.text_active : ''}`}
+            >
+              Лента заказов
+            </p>
+          </>
+        )}
       </NavLink>
       <div className={styles.logo}>
         <Logo className={''} />
@@ -37,13 +53,19 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
       <NavLink
         to='/profile'
         className={({ isActive }) =>
-          isActive ? styles.link_position_last : styles.link_active
+          isActive ? styles.link_position_last : styles.link
         }
       >
-        <ProfileIcon type='primary' />
-        <p className='text text_type_main-default ml-2'>
-          {userName || 'Личный кабинет'}
-        </p>
+        {({ isActive }) => (
+          <>
+            <ProfileIcon type={isActive ? 'primary' : 'secondary'} />
+            <span
+              className={`text text_type_main-default ml-2 ${isActive ? styles.text_active : ''}`}
+            >
+              {userName || 'Личный кабинет'}
+            </span>
+          </>
+        )}
       </NavLink>
     </nav>
   </header>
