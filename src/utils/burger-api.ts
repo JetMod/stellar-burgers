@@ -233,26 +233,3 @@ export const logoutApi = () =>
       token: localStorage.getItem('refreshToken')
     })
   }).then((res) => checkResponse<TServerResponse<{}>>(res));
-
-// burger-api.js
-
-export const getOrdersAndIngredientsApi = async () => {
-  const ordersPromise = fetch(`${URL}/orders/all`);
-  const ingredientsPromise = fetch(`${URL}/ingredients`);
-
-  const [ordersResponse, ingredientsResponse] = await Promise.all([
-    ordersPromise,
-    ingredientsPromise
-  ]);
-
-  const ordersData = await checkResponse<TFeedsResponse>(ordersResponse);
-  const ingredientsData =
-    await checkResponse<TIngredientsResponse>(ingredientsResponse);
-
-  return {
-    orders: ordersData.orders,
-    total: ordersData.total,
-    totalToday: ordersData.totalToday,
-    ingredients: ingredientsData.data
-  };
-};
