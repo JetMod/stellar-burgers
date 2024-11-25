@@ -15,7 +15,7 @@ export const OrdersList: FC<{ orders: any[] }> = ({ orders }) => {
   }, [dispatch]);
 
   return (
-    <div style={{ maxHeight: '100%', overflowY: 'auto' }}>
+    <div>
       {orders.length === 0 ? (
         <div>No orders available.</div>
       ) : (
