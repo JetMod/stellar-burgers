@@ -7,7 +7,7 @@ export const OrdersListUI: FC<OrdersListUIProps> = ({
   orderByDate,
   ingredients
 }) => (
-  <div className={`${styles.content}`}>
+  <div>
     {orderByDate.map((order) => (
       <OrderCard order={order} ingredients={ingredients} key={order._id} />
     ))}

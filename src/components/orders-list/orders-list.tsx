@@ -4,7 +4,7 @@ import {
   fetchAllIngredients,
   selectIngredientsList
 } from '../../slices/ingredientsSlice';
-import { OrderCard } from '../order-card';
+import { OrdersListUI } from '../ui/orders-list';
 
 export const OrdersList: FC<{ orders: any[] }> = ({ orders }) => {
   const dispatch = useDispatch();
@@ -15,13 +15,11 @@ export const OrdersList: FC<{ orders: any[] }> = ({ orders }) => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div style={{ maxHeight: '100%', overflowY: 'auto' }}>
       {orders.length === 0 ? (
         <div>No orders available.</div>
       ) : (
-        orders.map((order) => (
-          <OrderCard key={order._id} order={order} ingredients={ingredients} />
-        ))
+        <OrdersListUI orderByDate={orders} ingredients={ingredients} />
       )}
     </div>
   );
