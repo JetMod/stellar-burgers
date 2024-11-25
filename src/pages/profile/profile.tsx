@@ -1,61 +1,64 @@
+import { FC, useEffect, useState, SyntheticEvent } from 'react';
+import { useDispatch, useSelector } from '../../services/store';
+import { selectUserData, modifyUser } from '../../slices/authSlice';
 import { ProfileUI } from '@ui-pages';
-import { FC, SyntheticEvent, useEffect, useState } from 'react';
 
 export const Profile: FC = () => {
-  /** TODO: взять переменную из стора */
-  const user = {
-    name: '',
-    email: ''
-  };
+  const dispatch = useDispatch();
+  const userData = useSelector(selectUserData);
 
-  const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
+  const [formValues, setFormValues] = useState({
+    name: '',
+    email: '',
     password: ''
   });
 
   useEffect(() => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      name: user?.name || '',
-      email: user?.email || ''
-    }));
-  }, [user]);
+    if (userData) {
+      setFormValues({
+        email: userData.email || '',
+        name: userData.name || '',
+        password: ''
+      });
+    }
+  }, [userData]);
 
-  const isFormChanged =
-    formValue.name !== user?.name ||
-    formValue.email !== user?.email ||
-    !!formValue.password;
+  const hasFormChanged =
+    formValues.name !== userData?.name ||
+    formValues.email !== userData?.email ||
+    Boolean(formValues.password);
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    dispatch(modifyUser(formValues));
   };
 
-  const handleCancel = (e: SyntheticEvent) => {
+  const handleFormCancel = (e: SyntheticEvent) => {
     e.preventDefault();
-    setFormValue({
-      name: user.name,
-      email: user.email,
-      password: ''
-    });
+    if (userData) {
+      setFormValues({
+        name: userData.name,
+        email: userData.email,
+        password: ''
+      });
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValue((prevState) => ({
+    const { name, value } = e.target;
+    setFormValues((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
   };
 
   return (
     <ProfileUI
-      formValue={formValue}
-      isFormChanged={isFormChanged}
-      handleCancel={handleCancel}
-      handleSubmit={handleSubmit}
+      formValue={formValues}
+      isFormChanged={hasFormChanged}
       handleInputChange={handleInputChange}
+      handleCancel={handleFormCancel}
+      handleSubmit={handleFormSubmit}
     />
   );
-
-  return null;
 };
