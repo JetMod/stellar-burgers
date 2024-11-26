@@ -9,6 +9,9 @@ export const IngredientDetailsUI: FC<IngredientDetailsUIProps> = memo(
 
     return (
       <div className={styles.content}>
+        <h1 className='undefined text text_type_main-large'>
+          Детали ингридиента
+        </h1>
         <img
           className={styles.img}
           alt='изображение ингредиента.'
