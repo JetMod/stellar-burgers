@@ -14,7 +14,6 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
   const isLoggedIn = Boolean(userName);
   const location = useLocation();
 
-  // Проверяем, активен ли маршрут конструктора или страниц ингредиентов
   const isConstructorActive =
     location.pathname === '/' || location.pathname.startsWith('/ingredients');
 
@@ -64,18 +63,18 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         <NavLink
           to='/profile'
           className={({ isActive }) =>
-            isActive || !isLoggedIn ? styles.link_position_last : styles.link
+            isActive ? styles.link_position_last : styles.link
           }
         >
           {({ isActive }) => (
             <>
               <ProfileIcon
-                type={isActive || !isLoggedIn ? 'primary' : 'secondary'}
+                type={isActive || !isLoggedIn ? 'secondary' : 'primary'}
               />
               <span
-                className={`text text_type_main-default ml-2 ${isActive || !isLoggedIn ? styles.text_active : ''}`}
+                className={`text text_type_main-default ml-2 ${isActive ? styles.text_active : ''}`}
               >
-                {userName || 'Личный кабинет'}
+                {isLoggedIn ? userName : 'Личный кабинет'}
               </span>
             </>
           )}
