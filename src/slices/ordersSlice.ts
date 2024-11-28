@@ -34,7 +34,7 @@ export interface OrdersState {
   modalOrderData: TOrder | null;
 }
 
-const initialState: OrdersState = {
+export const initialState: OrdersState = {
   orders: [],
   currentOrder: null,
   isOrderRequestPending: false,
@@ -51,12 +51,19 @@ const ordersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchOrders.pending, (state) => {
+        state.isOrderRequestPending = true;
+      })
       .addCase(
         fetchOrders.fulfilled,
         (state, action: PayloadAction<TOrder[]>) => {
           state.orders = action.payload;
+          state.isOrderRequestPending = false;
         }
       )
+      .addCase(fetchOrders.rejected, (state) => {
+        state.isOrderRequestPending = false;
+      })
       .addCase(createBurgerOrder.pending, (state) => {
         state.isOrderRequestPending = true;
       })

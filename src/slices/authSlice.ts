@@ -53,13 +53,13 @@ interface UserState {
   errorMessage: string;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   isAuthChecked: false,
   userInfo: null,
   errorMessage: ''
 };
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
