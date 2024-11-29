@@ -4,7 +4,8 @@ import {
   moveIngredientBack,
   moveIngredientForward,
   resetBuilder,
-  burgerBuilderReducer
+  burgerBuilderReducer,
+  initialState
 } from './burgerBuilderSlice';
 import { TIngredient } from '../utils/types';
 
@@ -17,12 +18,6 @@ jest.mock('@reduxjs/toolkit', () => {
 });
 
 describe('burgerBuilderSlice tests', () => {
-  const initialState = {
-    items: {
-      bun: null,
-      ingredients: []
-    }
-  };
 
   const mockIngredient: TIngredient = {
     _id: '1',
